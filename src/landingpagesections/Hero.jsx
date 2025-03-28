@@ -97,7 +97,7 @@ export default function Hero() {
 
                             <div className="header">
                                 <h1 >
-                                    ISO <span className="herosecond">EASY</span>
+                                REVIEW <span className="herosecond">R</span>
                                 </h1>
 
 
@@ -105,14 +105,16 @@ export default function Hero() {
                             <TypeAnimation
                                 sequence={[
 
-                                    'Create stunning graphics with ease and precision.',
+                                    'Bridge Research & Industry: AI in Action.',
                                     1000,
-                                    'Transform your ideas into reality easily with ISO Easy.',
+                                    'Fuels Startups with Cutting-Edge Academic Insights.',
                                     1000,
-                                    'Customize every detail to fit your unique needs.',
+                                    'Turns Academic Breakthroughs into Business Knowledge.',
                                     1000,
-                                    'The ultimate tool for designing your workflow.',
-                                    1000
+                                    'Where Research Feeds Rapid Scale.',
+                                    1000,
+                                    'Where AI driven speed & disruption.',
+                                    1000,
                                 ]}
                                 wrapper="p"
                                 speed={80}

@@ -13,13 +13,13 @@ import sculping from "../assets/essence/sculping.jpeg";
 import { ClipLoader } from 'react-spinners';
 
 const honeycombData = [
-  { id: 1, imageUrl: vision, title: 'VISIONARY ARCHITECTURE' },
-  { id: 2, imageUrl: dynamic, title: 'DYNAMIC DESIGNS CRAFTING' },
-  { id: 3, imageUrl: forging, title: 'FORGING FUTURE PATH' },
-  { id: 4, imageUrl: canvas, title: 'DESIGN CANVAS' },
-  { id: 5, imageUrl: empower, title: 'EMPOWERING CREATIVITY' },
-  { id: 6, imageUrl: artist, title: 'ARTISTRY IN CREATION' },
-  { id: 7, imageUrl: sculping, title: 'CONCEPTUAL SCULPTING ' },
+  { id: 1, imageUrl: vision, title: 'AI-driven progress' },
+  { id: 2, imageUrl: dynamic, title: 'Boost startup success' },
+  { id: 3, imageUrl: forging, title: 'Global knowledge network' },
+  { id: 4, imageUrl: canvas, title: 'Relentless learning' },
+  { id: 5, imageUrl: empower, title: 'Power of network effects' },
+  { id: 6, imageUrl: artist, title: 'Speedy Expert Insights' },
+  { id: 7, imageUrl: sculping, title: 'Seamless Industry Bridge ' },
 ];
 
 const Essence = () => {
@@ -28,7 +28,7 @@ const Essence = () => {
 
   return (
     <>
-      <section id='essence' className='pt-3'>
+      <section id='essence' className='py-5'>
         <Container>
           <Heading heading={"WHAT SETS US APART"} />
           <div className="outercomb pt-3 pb-5">

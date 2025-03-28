@@ -8,10 +8,10 @@ import client from "../assets/counter/client.svg"
 import reviews from "../assets/counter/star.svg"
 const Counter = () => {
     const counters = [
-        { image: projects, end: 100, suffix: '+', label: 'PROJECT' },
-        { image: drawing, end: 100, suffix: '%', label: 'DRAWINGS' },
-        { image: client, end: 1000, suffix: '+', label: 'CLIENTS' },
-        { image: reviews, end: 500, suffix: '+', label: 'REVIEWS' }
+        { image: projects, end: 5000, suffix: '+', label: 'Researchers' },
+        { image: drawing, end: 100, suffix: '%', label: 'happy clients' },
+        { image: client, end: 25, suffix: '+', label: 'universities' },
+        { image: reviews, end: 100000, suffix: '+', label: 'AI reviews' }
     ];
     return (
 

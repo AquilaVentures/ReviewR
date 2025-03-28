@@ -48,7 +48,7 @@ const Header = () => {
 
     return (
         <>
-            <Navbar expanded={false} expand="lg" fixed="top" variant="dark" style={navbarStyle} className={scrolling ? 'scrolled py-2' : 'py-2'}>
+            <Navbar expanded={false} expand="lg" fixed="top" variant="dark" style={navbarStyle} className={scrolling ? 'scrolled py-3' : 'py-3'}>
                 <Container>
                     <Link href="#home" passHref className="text-decoration-none">
                         <div>

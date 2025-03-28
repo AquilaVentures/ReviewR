@@ -12,16 +12,11 @@ const Vision = () => {
                     <Row className="justify-content-between">
                         <Col xs={12} lg={6} className="col-lg-6">
                             <div className="who py-2 py-lg-5">
-                                <Heading heading={"Our vision"} />
+                                <Heading heading={"WHO WE ARE "} />
                                 <p className='text-justify'>
-                                Introducing an innovative new product, ISOeasy! This cutting-edge platform is designed to revolutionize the way you create and design your pipelines. With ISOeasy, you will have access to an intuitive interface featuring dynamic shapes and graphics that allow for seamless, creative pipeline design. Whether you are a seasoned engineer or new to the field, ISOeasy offers powerful tools to help you visualize and implement your ideas effortlessly. Stay tuned for more updates as we prepare to unveil a new era in pipeline design, tailored to meet all your needs with precision and creativity. <i><b>Join our mailing list to be notified when we launch!</b> </i>
+                                We are an AI-driven platform revolutionizing the way academic insights power real-world innovation. By bridging top-tier research with startups hungry for growth, we accelerate peer review, publishing, and knowledge distribution—turning breakthroughs into business traction. Our mission is simple yet bold: transform the “dinosaur” industry of academic publishing and drive unstoppable progress for the next wave of tech leaders. 
                                 </p>
-            <div className='text-center text-lg-start'>
-            <Link href='#contact' passHref>
-                                    <Button variant="vision">Join Mailing List</Button>
-                                </Link>
-            </div>
-                                
+
 
                             </div>
                         </Col>
