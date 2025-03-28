@@ -70,8 +70,8 @@ const Header = () => {
                                 </Link>
                             ))}
                         </Nav>
-                        <Link href='#contact' passHref>
-                            <Button variant="mailing">Join Mailing List</Button>
+                        <Link href='#subscribe' passHref>
+                            <Button variant="mailing">Subscribe</Button>
                         </Link>
                     </Navbar.Collapse>
                 </Container>

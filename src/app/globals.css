@@ -680,3 +680,9 @@ html {
   background-size: contain;
   background-repeat: no-repeat;
 }
+footer {
+  background-color: var(--primary-color) !important;
+}
+.pressbg h5 span {
+  color: var(--secondary-color) !important;
+}
