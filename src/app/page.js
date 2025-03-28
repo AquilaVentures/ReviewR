@@ -6,6 +6,7 @@ import Essence from '@/landingpagesections/Essence'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 import Blogs from '@/landingpagesections/Blogs'
+import NewsLetter from '@/landingpagesections/NewsLetter'
 const page = () => {
   return (
     <>
@@ -14,6 +15,7 @@ const page = () => {
       <Vision />
       <Counter />
       <Blogs />
+      <NewsLetter/>
       <Essence />
 
     </>

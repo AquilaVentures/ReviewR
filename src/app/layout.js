@@ -4,7 +4,9 @@ import localFont from 'next/font/local';
 import "../../node_modules/animate.css";
 import Header from '@/components/shared/Header';
 import Footer from '@/components/shared/Footer';
-
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 const myFont = localFont({ src: '../../public/manrope.ttf' });
  const metadata = {
   title: 'ISO Easy',

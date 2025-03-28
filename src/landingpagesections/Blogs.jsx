@@ -4,7 +4,7 @@ import { Card, Col, Container, Row } from 'react-bootstrap'
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import { GrFormNextLink, GrFormPreviousLink } from "react-icons/gr";
-import image from "../../../public/card-1.svg";
+import image from "../../public/card-1.svg";
 import Image from 'next/image';
 const Blogs = () => {
     const [swiper, setSwiper] = useState(null);
@@ -47,7 +47,7 @@ const Blogs = () => {
 
     return (
         <>
-            <div className="darkbg blogsbg" id='blogs'>
+            <div className="counterbg blogsbg" id='blogs'>
                 <Container className='py-5'>
                     <Swiper
                         modules={[Autoplay, Navigation, Pagination]}
@@ -100,7 +100,7 @@ const Blogs = () => {
 
                                             <div>
                                                 <h6 className="m-0">Geay Walker</h6>
-                                                <p className="m-0 text-muted">27 March 2024</p>
+                                                <p className="m-0 text-white">27 March 2024</p>
                                             </div>
                                         </div>
                                     </Card.Body>

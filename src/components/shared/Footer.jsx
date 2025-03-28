@@ -51,7 +51,7 @@ const Footer = () => {
                         <Col lg={6} className="text-start">
                             {/* <Image src={logo} width={0} height={0} style={{ width: "100%", height: "100%" }} alt='footerlogo' /> */}
                             <div>
-                                <h1 className='footer-logo'>ISO EASY</h1>
+                                <h1 className='footer-logo'><span className='text-white'>REVIEW</span>R</h1>
                             </div>
                         </Col>
 

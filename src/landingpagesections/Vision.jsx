@@ -6,7 +6,7 @@ const Vision = () => {
     return (
         <>
             <section id='vision'>
-                <Container className=" my-5">
+                <Container >
                     <Row className="justify-content-between align-items-center">
                         <Col xs={12} lg={6} className="col-lg-6">
                             <div className="who py-2 py-lg-5">
