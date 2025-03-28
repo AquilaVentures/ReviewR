@@ -56,7 +56,7 @@ const Header = () => {
                                 {/* <Image src={logo} width={160} height={60} alt='logo' /> */}
                             </div>
                             <div>
-                                <h3 className='logotext mt-2'>ISO EASY</h3>
+                                <h3 className='logotext mt-2'><span className='text-white'>REVIEW</span>R</h3>
                             </div>
                         </div>
                     </Link>

@@ -5,14 +5,16 @@ import Vision from '@/landingpagesections/Vision'
 import Essence from '@/landingpagesections/Essence'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
+import Blogs from '@/landingpagesections/Blogs'
 const page = () => {
   return (
     <>
-    <ToastContainer />
+      <ToastContainer />
       <Hero />
       <Vision />
       <Counter />
-      <Essence/>
+      <Blogs />
+      <Essence />
 
     </>
   )
