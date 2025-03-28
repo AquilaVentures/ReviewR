@@ -2,7 +2,6 @@ import React from 'react'
 import Counter from '@/landingpagesections/Counter'
 import Hero from '@/landingpagesections/Hero'
 import Vision from '@/landingpagesections/Vision'
-import FeaturedDesigns from '@/landingpagesections/FeaturedDesigns'
 import Essence from '@/landingpagesections/Essence'
 import Provisions from '@/landingpagesections/Provisions'
 import { ToastContainer } from 'react-toastify'
@@ -15,7 +14,6 @@ const page = () => {
       <Vision />
       <Counter />
       <Provisions/>
-      <FeaturedDesigns/>
       <Essence/>
 
     </>
