@@ -1,5 +1,4 @@
 import React from 'react'
-import ContactForm from '@/landingpagesections/ContactForm'
 import Counter from '@/landingpagesections/Counter'
 import Hero from '@/landingpagesections/Hero'
 import Vision from '@/landingpagesections/Vision'
@@ -18,7 +17,6 @@ const page = () => {
       <Provisions/>
       <FeaturedDesigns/>
       <Essence/>
-      <ContactForm />
 
     </>
   )

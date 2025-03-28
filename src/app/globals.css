@@ -1,6 +1,6 @@
 :root {
   --primary-color: #002338;
-  --secondary-color: #d7ba89;
+  --secondary-color: #ffa500;
 }
 html {
   scroll-behavior: smooth;
@@ -209,7 +209,7 @@ html {
 .text-container {
   position: absolute;
   top: 20%;
-  left: 8%;
+  left: 12%;
   width: auto;
 }
 
