@@ -24,7 +24,7 @@ const Footer = () => {
             <Col xs={12} lg={6}>
               <div className="text-center text-lg-start">
                 <h5 className="text-white fw-bold">
-                REVIEW <span>R</span>
+                REVIEW<span>R</span>
                 </h5>
               </div>
             </Col>

@@ -49,6 +49,12 @@ const Blogs = () => {
         <>
             <div className="counterbg blogsbg" id='blogs'>
                 <Container className='py-5'>
+                    <div className="text-center mb-3">
+                        <h2 className='fw-bold text-white'>OUR BLOGS</h2>
+                        <p className='text-white my-3'>
+                        Stay Updated with the Latest Trends and Insights
+                        </p>
+                    </div>
                     <Swiper
                         modules={[Autoplay, Navigation, Pagination]}
                         spaceBetween={20}

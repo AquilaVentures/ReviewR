@@ -97,7 +97,7 @@ export default function Hero() {
 
                             <div className="header">
                                 <h1 >
-                                REVIEW <span className="herosecond">R</span>
+                                REVIEW<span className="herosecond">R</span>
                                 </h1>
 
 

@@ -9,7 +9,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 const myFont = localFont({ src: '../../public/manrope.ttf' });
  const metadata = {
-  title: 'ISO Easy',
+  title: 'ReviewR',
   description: 'A Pipeline Compant',
 };
 
