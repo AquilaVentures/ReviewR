@@ -80,6 +80,24 @@ html {
   transform-origin: bottom left;
 }
 
+.nav-btn {
+  color: var(--secondary-color) !important;
+  background-color: transparent !important;
+  font-weight: 600;
+  border: none !important;
+  padding: 10px 20px;
+  border-radius: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease;
+}
+
+.nav-btn:hover {
+  background-color: #ff8c00;
+  color: white;
+}
+
 .offcanvas {
   background-color: var(--primary-color) !important;
   width: 300px !important;
