@@ -3,7 +3,7 @@ import { Button, Col, Container, Form, Row } from 'react-bootstrap';
 
 const NewsLetter = () => {
     return (
-        <div className="pressbg pressborder py-5 newsletter-bg" id='subscribe'>
+        <div className="pressbg pressborder pb-5 newsletter-bg" id='subscribe'>
             <Container>
                 <Row>
                     <Col xs={12} lg={8} className='mx-auto'>
