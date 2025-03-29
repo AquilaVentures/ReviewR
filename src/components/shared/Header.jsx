@@ -50,7 +50,7 @@ const Header = () => {
         <>
             <Navbar expanded={false} expand="lg" fixed="top" variant="dark" style={navbarStyle} className={scrolling ? 'scrolled py-3' : 'py-3'}>
                 <Container>
-                    <Link href="#home" passHref className="text-decoration-none">
+                    <Link href="/" passHref className="text-decoration-none">
                         <div>
                             <div>
                                 {/* <Image src={logo} width={160} height={60} alt='logo' /> */}
