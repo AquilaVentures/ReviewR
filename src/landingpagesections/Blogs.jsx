@@ -6,10 +6,12 @@ import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import { GrFormNextLink, GrFormPreviousLink } from "react-icons/gr";
 import image from "../../public/card-1.svg";
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 const Blogs = () => {
     const [swiper, setSwiper] = useState(null);
     const [prevEl, setPrevEl] = useState(null);
     const [nextEl, setNextEl] = useState(null);
+    const router = useRouter();
     const slidesData = [
         {
             title: "Data Scientist",
@@ -74,7 +76,7 @@ const Blogs = () => {
                     >
                         {slidesData.map((slide, index) => (
                             <SwiperSlide key={index}>
-                                <Card className="rounded-4 my-3 p-2 bootcamp-card">
+                                <Card className="rounded-4 my-3 p-2 bootcamp-card" onClick={()=>router.push("/blogs-detail")} style={{ cursor: "pointer" }}>
                                     <div
                                         style={{
                                             width: "100%",
@@ -92,7 +94,7 @@ const Blogs = () => {
                                         />
                                     </div>
                                     <Card.Body className="mt-2">
-                                        <Card.Title>{slide.title}</Card.Title>
+                                        <Card.Title >{slide.title}</Card.Title>
                                         <Card.Text className="text-white">{slide.text}</Card.Text>
 
                                         <hr className="text-white" />
