@@ -7,6 +7,7 @@ import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 import Blogs from '@/landingpagesections/Blogs'
 import NewsLetter from '@/landingpagesections/NewsLetter'
+import Upload from '@/landingpagesections/Upload'
 const page = () => {
   return (
     <>
@@ -14,10 +15,10 @@ const page = () => {
       <Hero />
       <Vision />
       <Counter />
-      
+
       <Blogs />
       <Essence />
-   
+      <Upload />
       <NewsLetter />
 
     </>

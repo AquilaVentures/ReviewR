@@ -43,7 +43,7 @@ const Header = () => {
 
     const navbarStyle = {
         backgroundColor: scrolling ? '#002338' : 'rgba(0, 0, 0, 0.4)',
-        borderBottom: scrolling ? '3px solid #D7BA89' : 'none',
+        borderBottom: scrolling ? '3px solid #ffa500' : 'none',
     };
 
     return (
