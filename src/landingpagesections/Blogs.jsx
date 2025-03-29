@@ -48,11 +48,13 @@ const Blogs = () => {
     return (
         <>
             <div className="counterbg blogsbg" id='blogs'>
+
                 <Container className='py-5'>
-                    <div className="text-center mb-3">
+                    <hr className='text-white' />
+                    <div className="text-center my-4">
                         <h2 className='fw-bold text-white'>OUR BLOGS</h2>
                         <p className='text-white my-3'>
-                        Stay Updated with the Latest Trends and Insights
+                            Stay Updated with the Latest Trends and Insights
                         </p>
                     </div>
                     <Swiper

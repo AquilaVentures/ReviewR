@@ -1,9 +1,9 @@
 "use client"
+import CounterCards from '@/components/shared/CounterCards';
 import React from 'react'
 import { Col, Container, Row } from 'react-bootstrap';
 import { AiOutlineCheckCircle, AiOutlineStar } from 'react-icons/ai';
 import { FaUserGraduate, FaUniversity } from 'react-icons/fa';
-import CounterCards from "../components/landingpagecomponents/CounterCards"
 
 const Counter = () => {
     const counters = [
@@ -14,7 +14,7 @@ const Counter = () => {
     ];
 
     return (
-        <div className="counterbg py-5">
+        <div className="counterbg pt-5">
             <Container>
                 <Row>
                     {counters.map((counter, index) => (
@@ -28,6 +28,7 @@ const Counter = () => {
                         </Col>
                     ))}
                 </Row>
+               
             </Container>
         </div>
     );

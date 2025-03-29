@@ -1,10 +1,8 @@
 "use client"
+import Link from "next/link";
 import React from "react";
 import {Col, Container, Row } from "react-bootstrap";
 import { FaLinkedin } from "react-icons/fa6";
-import { IoMailUnreadSharp } from "react-icons/io5";
-import Link from "next/link";
-
 const Footer = () => {
   const currentYear = new Date().getFullYear();
   const links = [
