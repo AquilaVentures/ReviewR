@@ -14,9 +14,11 @@ const page = () => {
       <Hero />
       <Vision />
       <Counter />
+      
       <Blogs />
-      <NewsLetter/>
       <Essence />
+   
+      <NewsLetter />
 
     </>
   )

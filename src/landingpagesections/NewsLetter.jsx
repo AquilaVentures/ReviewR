@@ -28,6 +28,7 @@ const NewsLetter = () => {
                         </div>
                     </Col>
                 </Row>
+                <hr className='text-white' />
             </Container>
         </div>
     );
