@@ -2,14 +2,14 @@
 import React from 'react';
 import Image from 'next/image';
 import Heading from '../components/shared/Heading';
-import { Container} from 'react-bootstrap';
-import vision from "../assets/essence/vision.jpeg";
-import forging from "../assets/essence/forging.jpeg";
-import dynamic from "../assets/essence/dynamic.jpeg";
-import canvas from "../assets/essence/canvas.jpeg";
-import empower from "../assets/essence/empower.jpeg";
-import artist from "../assets/essence/artist.jpeg";
-import sculping from "../assets/essence/sculping.jpeg";
+import { Container } from 'react-bootstrap';
+import vision from "../../public/vision.jpeg";
+import forging from "../../public/forging.jpeg";
+import dynamic from "../../public/dynamic.jpeg";
+import canvas from "../../public/canvas.jpeg";
+import empower from "../../public/empower.jpeg";
+import artist from "../../public/artist.jpeg";
+import sculping from "../../public/sculping.jpeg";
 const honeycombData = [
   { id: 1, imageUrl: vision, title: 'AI-driven progress' },
   { id: 2, imageUrl: dynamic, title: 'Boost startup success' },
@@ -53,7 +53,7 @@ const Essence = () => {
         </Container>
       </section>
 
-  
+
 
     </>
   );
