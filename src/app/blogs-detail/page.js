@@ -26,7 +26,7 @@ const BlogDetailPage = () => {
                 <Row className="pt-5">
 
                     <Col>
-                        <Button className="nav-btn" onClick={()=>router.push("/")}>
+                        <Button className="nav-btn" onClick={() => router.push("/")}>
                             <HiOutlineChevronDoubleLeft className="me-2" /> Previous Blog
                         </Button>
 
