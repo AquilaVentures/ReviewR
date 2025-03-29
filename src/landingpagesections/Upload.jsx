@@ -41,7 +41,13 @@ const Upload = () => {
     return (
         <div className='herobg py-5'>
             <Container className='pt-5'>
-                <Row>
+                <div className="text-center mb-5">
+                    <h2 className='fw-bold text-white'>Seamlessly Analyze Your Business Documents</h2>
+                    <p className='text-white my-3'>
+                    Upload your files to get instant insights and business relevance scores powered by AI.
+                    </p>
+                </div>
+                <Row className='mt-4'>
                     <Col xs={12} lg={8} className='mx-auto text-center'>
                         <div className="drop-container">
                             <Card className="bg-transparent text-center py-5" style={{ border: "3px dashed #ffa500", cursor: "pointer" }}>
