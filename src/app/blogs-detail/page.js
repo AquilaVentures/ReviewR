@@ -24,11 +24,11 @@ const BlogDetailPage = () => {
             <Container className="py-5">
 
                 <Row className="pt-5">
-
+                    <Button className="nav-btn d-flex align-items-center  justify-content-start" onClick={() => router.push("/")}>
+                        <HiOutlineChevronDoubleLeft className="me-2" /> Back
+                    </Button>
                     <Col>
-                        <Button className="nav-btn" onClick={() => router.push("/")}>
-                            <HiOutlineChevronDoubleLeft className="me-2" /> Previous Blog
-                        </Button>
+
 
 
                         <h1 className="fw-bold">Blog Title</h1>
