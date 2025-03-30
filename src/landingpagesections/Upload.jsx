@@ -1,15 +1,17 @@
 "use client"
 import React, { useState } from 'react';
-import { Col, Container, Row, Card, Button, Spinner, Alert } from 'react-bootstrap';
+import { Col, Container, Row, Card, Button, Spinner } from 'react-bootstrap';
 import { useDropzone } from "react-dropzone";
 import { IoCloudUpload } from "react-icons/io5";
 import { marked } from 'marked';
+import { toast } from 'react-toastify';
+import axios from 'axios';
 
+const baseURL = process.env.NEXT_PUBLIC_BASE_URL ;
+console.log("baseURL",baseURL)
 const Upload = () => {
     const [selectedFile, setSelectedFile] = useState(null);
     const [fileInfo, setFileInfo] = useState('');
-    const [flashMessage, setFlashMessage] = useState('');
-    const [successMessage, setSuccessMessage] = useState('');
     const [reportContent, setReportContent] = useState('');
     const [loading, setLoading] = useState(false);
     const [activeAgent, setActiveAgent] = useState(null);
@@ -35,9 +37,9 @@ const Upload = () => {
         if (file && file.name.toLowerCase().endsWith('.pdf')) {
             setSelectedFile(file);
             setFileInfo(`Selected file: ${file.name}`);
-            setFlashMessage('');
+            toast.dismiss();
         } else {
-            setFlashMessage('Please select a valid PDF file.');
+            toast.error('Please select a valid PDF file.');
             setSelectedFile(null);
             setFileInfo('');
         }
@@ -45,41 +47,43 @@ const Upload = () => {
 
     const handleAgentClick = async (agentId) => {
         if (!selectedFile) {
-            alert('Please upload a PDF file first.');
+            toast.error('Please upload a PDF file first.');
             return;
         }
 
         setActiveAgent(agentId);
         setDisabledAgents(agentOptions.map((agent) => agent.id).filter(id => id !== agentId));
         setLoading(true);
-        setFlashMessage('');
-        setSuccessMessage('');
-        setReportContent('');
+        toast.dismiss();
 
         const formData = new FormData();
         formData.append('pdf_file', selectedFile);
         formData.append('agent', agentId);
 
         try {
-            const response = await fetch('http://localhost:5004/process', {
-                method: 'POST',
-                body: formData
+            const response = await axios.post(`${baseURL}/process`, formData, {
+                headers: { 'Content-Type': 'multipart/form-data' }
             });
 
-            const result = await response.json();
             setLoading(false);
             setDisabledAgents([]);
 
-            if (response.ok) {
-                setSuccessMessage('Review completed successfully. See below:');
-                setReportContent(marked.parse(result.report_content.replace(/\n{2,}/g, '\n\n')));
+            if (response.status === 200) {
+                toast.success('Review completed successfully.');
+                setReportContent(marked.parse(response.data.report_content.replace(/\n{2,}/g, '\n\n')));
+            } else if (response.data.error && response.data.error.includes('Incorrect API key provided')) {
+                toast.error('Invalid OpenAI API key. Please check your API key configuration.');
             } else {
-                setFlashMessage(result.error || 'An error occurred while processing the file.');
+                toast.error(response.data.error || 'An error occurred while processing the file.');
             }
         } catch (error) {
             setLoading(false);
             setDisabledAgents([]);
-            setFlashMessage('An unexpected error occurred.');
+            if (error.response && error.response.status === 401) {
+                toast.error('Invalid OpenAI API key. Please check your API key configuration.');
+            } else {
+                toast.error('An unexpected error occurred.');
+            }
             console.error('Error:', error);
         }
     };
@@ -110,7 +114,6 @@ const Upload = () => {
                     </Col>
                 </Row>
 
-                {successMessage && <Alert variant="success" className="text-center mt-4">{successMessage}</Alert>}
                 <Row className="mt-4 paper-upload">
                     {agentOptions.map(({ id, label }) => (
                         <Col xs={6} md={4} className="mb-2" key={id}>
@@ -130,7 +133,6 @@ const Upload = () => {
                         <Spinner color='#ffa500' animation="border" style={{ color: "#ffa500" }} />
                     </div>
                 )}
-                {flashMessage && <Alert variant="danger" className="text-center mt-4">{flashMessage}</Alert>}
                 {reportContent && (
                     <Card className="mt-4">
                         <Card.Body>

@@ -721,6 +721,7 @@ footer {
 .paper-upload button {
   background-color: var(--primary-color) !important;
   border-color: var(--secondary-color) !important;
+  min-height: 80px !important;
 }
 
 .paper-upload .active-func {
