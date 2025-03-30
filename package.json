@@ -15,6 +15,8 @@
     "bootstrap": "^5.3.2",
     "emailjs-com": "^3.2.0",
     "moment": "^2.29.4",
+    "mongodb": "^6.15.0",
+    "mongoose": "^8.13.1",
     "next": "14.0.1",
     "primereact": "^10.0.9",
     "react": "^18.2.0",
