@@ -106,6 +106,7 @@ const Upload = () => {
                                 <div {...getRootProps()} className="">
                                     <input {...getInputProps()} />
                                     <IoCloudUpload size={40} color='#ffa500' />
+                                    <p className="text-white">Check your paper on business relevance and get a blog posted about it?</p>
                                     <p className="text-white">Drag & drop files here, or click to select files</p>
                                 </div>
                                 {fileInfo && <p className="text-white mt-3">{fileInfo}</p>}
