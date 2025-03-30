@@ -32,7 +32,7 @@ const Upload = () => {
 
     const onDrop = (acceptedFiles) => {
         const file = acceptedFiles[0];
-        if (file && file.type === 'application/pdf') {
+        if (file && file.name.toLowerCase().endsWith('.pdf')) {
             setSelectedFile(file);
             setFileInfo(`Selected file: ${file.name}`);
             setFlashMessage('');
@@ -84,7 +84,7 @@ const Upload = () => {
         }
     };
 
-    const { getRootProps, getInputProps } = useDropzone({ onDrop });
+    const { getRootProps, getInputProps } = useDropzone({ onDrop, multiple: false });
 
     return (
         <div className='herobg py-5'>
@@ -111,13 +111,13 @@ const Upload = () => {
                 </Row>
 
                 {successMessage && <Alert variant="success" className="text-center mt-4">{successMessage}</Alert>}
-                <Row className="mt-4">
+                <Row className="mt-4 paper-upload">
                     {agentOptions.map(({ id, label }) => (
                         <Col xs={6} md={4} className="mb-2" key={id}>
                             <Button
                                 onClick={() => handleAgentClick(id)}
                                 variant={activeAgent === id ? 'primary' : 'secondary'}
-                                className="w-100"
+                                className={activeAgent === id ? 'w-100 active-func' : 'w-100'}
                                 disabled={disabledAgents.includes(id)}
                             >
                                 {label}
@@ -127,7 +127,7 @@ const Upload = () => {
                 </Row>
                 {loading && (
                     <div className="text-center mt-4">
-                        <Spinner animation="border" variant="primary" />
+                        <Spinner color='#ffa500' animation="border" style={{ color: "#ffa500" }} />
                     </div>
                 )}
                 {flashMessage && <Alert variant="danger" className="text-center mt-4">{flashMessage}</Alert>}
