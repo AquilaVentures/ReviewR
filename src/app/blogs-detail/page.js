@@ -9,12 +9,10 @@ const BlogDetailPage = () => {
     const router = useRouter();
 
     const handleNextBlog = () => {
-        // Logic to navigate to the next blog
         router.push('/blogs-detail?blogId=next');
     };
 
     const handlePreviousBlog = () => {
-        // Logic to navigate to the previous blog
         router.push('/blogs-detail?blogId=previous');
     };
 
