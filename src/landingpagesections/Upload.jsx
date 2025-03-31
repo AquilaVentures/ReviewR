@@ -1,9 +1,8 @@
 "use client"
 import React, { useState } from 'react';
-import { Col, Container, Row, Card, Button, Spinner } from 'react-bootstrap';
+import { Col, Container, Row, Card, Spinner } from 'react-bootstrap';
 import { useDropzone } from "react-dropzone";
 import { IoCloudUpload } from "react-icons/io5";
-import { marked } from 'marked';
 import { toast } from 'react-toastify';
 import axios from 'axios';
 
@@ -14,23 +13,7 @@ const Upload = () => {
     const [fileInfo, setFileInfo] = useState('');
     const [reportContent, setReportContent] = useState('');
     const [loading, setLoading] = useState(false);
-    const [activeAgent, setActiveAgent] = useState(null);
-    const [disabledAgents, setDisabledAgents] = useState([]);
-
-    const agentOptions = [
-        { id: 'grammar_language_review', label: 'Grammar Review' },
-        { id: 'limitations_future_work', label: 'Limitations & Future Work' },
-        { id: 'literature_review', label: 'Literature Review' },
-        { id: 'methodology_evaluation', label: 'Methodology' },
-        { id: 'originality_novelty', label: 'Originality & Novelty' },
-        { id: 'relevance_scope', label: 'Relevance & Scope' },
-        { id: 'data_results_validation', label: 'Data & Results Validation' },
-        { id: 'structure_formatting', label: 'Structure & Formatting' },
-        { id: 'abstract_review', label: 'Abstract Review' },
-        { id: 'citation_review', label: 'Citation Review' },
-        { id: 'python_code_agent007', label: 'Python Coding v1' },
-        { id: 'python_code_agent69', label: 'Python Coding v2' }
-    ];
+    const [error, setError] = useState(null);
 
     const onDrop = (acceptedFiles) => {
         const file = acceptedFiles[0];
@@ -45,46 +28,30 @@ const Upload = () => {
         }
     };
 
-    const handleAgentClick = async (agentId) => {
+    const handleUpload = async () => {
         if (!selectedFile) {
-            toast.error('Please upload a PDF file first.');
+            toast.error("Please select a file first!");
             return;
         }
 
-        setActiveAgent(agentId);
-        setDisabledAgents(agentOptions.map((agent) => agent.id).filter(id => id !== agentId));
-        setLoading(true);
-        toast.dismiss();
-
         const formData = new FormData();
-        formData.append('pdf_file', selectedFile);
-        formData.append('agent', agentId);
+        formData.append("file", selectedFile);
 
+        setLoading(true);
+        setError(null);
         try {
-            const response = await axios.post(`${baseURL}/process`, formData, {
-                headers: { 'Content-Type': 'multipart/form-data' }
+            const res = await axios.post(`${baseURL}/upload-pdf/`, formData, {
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                },
             });
-
+            const businessScore = res.data.business_dic?.abstracts?.[0]?.score; // Extract the score
+            setReportContent(businessScore); // Set only the score
+        } catch (err) {
+            setError(err.response ? err.response.data.detail : "An error occurred");
+            setReportContent('');
+        } finally {
             setLoading(false);
-            setDisabledAgents([]);
-
-            if (response.status === 200) {
-                toast.success('Review completed successfully.');
-                setReportContent(marked.parse(response.data.report_content.replace(/\n{2,}/g, '\n\n')));
-            } else if (response.data.error && response.data.error.includes('Incorrect API key provided')) {
-                toast.error('Invalid OpenAI API key. Please check your API key configuration.');
-            } else {
-                toast.error(response.data.error || 'An error occurred while processing the file.');
-            }
-        } catch (error) {
-            setLoading(false);
-            setDisabledAgents([]);
-            if (error.response && error.response.status === 401) {
-                toast.error('Invalid OpenAI API key. Please check your API key configuration.');
-            } else {
-                toast.error('An unexpected error occurred.');
-            }
-            console.error('Error:', error);
         }
     };
 
@@ -112,22 +79,14 @@ const Upload = () => {
                                 {fileInfo && <p className="text-white mt-3">{fileInfo}</p>}
                             </Card>
                         </div>
+                        <button
+                            onClick={handleUpload}
+                            className="btn btn-warning mt-3"
+                            disabled={loading}
+                        >
+                            {loading ? "Uploading..." : "Upload PDF"}
+                        </button>
                     </Col>
-                </Row>
-
-                <Row className="mt-4 paper-upload">
-                    {agentOptions.map(({ id, label }) => (
-                        <Col xs={6} md={4} className="mb-2" key={id}>
-                            <Button
-                                onClick={() => handleAgentClick(id)}
-                                variant={activeAgent === id ? 'primary' : 'secondary'}
-                                className={activeAgent === id ? 'w-100 active-func' : 'w-100'}
-                                disabled={disabledAgents.includes(id)}
-                            >
-                                {label}
-                            </Button>
-                        </Col>
-                    ))}
                 </Row>
                 {loading && (
                     <div className="text-center mt-4">
@@ -135,11 +94,16 @@ const Upload = () => {
                     </div>
                 )}
                 {reportContent && (
-                    <Card className="mt-4 bg-transparent text-white" style={{ border: "2px solid #ffa500" }}>
+                    <Card className="mt-4 bg-transparent text-white text-center" style={{ border: "2px solid #ffa500" }}>
                         <Card.Body>
-                            <div dangerouslySetInnerHTML={{ __html: reportContent }} />
+                            <h3 className='mb-0'>Business Score: {reportContent}</h3> {/* Display only the score */}
                         </Card.Body>
                     </Card>
+                )}
+                {error && (
+                    <div className="text-center mt-4 text-danger">
+                        <p>{error}</p>
+                    </div>
                 )}
             </Container>
         </div>
