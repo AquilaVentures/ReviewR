@@ -7,8 +7,8 @@ import { marked } from 'marked';
 import { toast } from 'react-toastify';
 import axios from 'axios';
 
-const baseURL = process.env.NEXT_PUBLIC_BASE_URL ;
-console.log("baseURL",baseURL)
+const baseURL = process.env.NEXT_PUBLIC_BASE_URL;
+console.log("baseURL", baseURL)
 const Upload = () => {
     const [selectedFile, setSelectedFile] = useState(null);
     const [fileInfo, setFileInfo] = useState('');
@@ -135,7 +135,7 @@ const Upload = () => {
                     </div>
                 )}
                 {reportContent && (
-                    <Card className="mt-4">
+                    <Card className="mt-4 bg-transparent text-white" style={{ border: "2px solid #ffa500" }}>
                         <Card.Body>
                             <div dangerouslySetInnerHTML={{ __html: reportContent }} />
                         </Card.Body>
