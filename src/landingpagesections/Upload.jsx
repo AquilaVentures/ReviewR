@@ -8,6 +8,7 @@ import axios from 'axios';
 import { marked } from 'marked';
 
 const baseURL = process.env.NEXT_PUBLIC_BASE_URL;
+const secondBaseURL = process.env.NEXT_PUBLIC_SECOND_BASE_URL;
 const Upload = () => {
     const [selectedFile, setSelectedFile] = useState(null);
     const [fileInfo, setFileInfo] = useState('');
@@ -66,6 +67,19 @@ const Upload = () => {
         setIsSubscribed(true);
     };
 
+    const handleClear = () => {
+        setSelectedFile(null);
+        setFileInfo('');
+        setReportContent('');
+        setLoadingReportSummary(false);
+        setLoadingDetailedReport(false);
+        setError(null);
+        setIsSubscribed(false);
+        setActiveAgent(null);
+        setDisabledAgents([]);
+        setShowSubscriptionButton(false);
+    };
+
     const { getRootProps, getInputProps } = useDropzone({ onDrop, multiple: false });
     const agentOptions = [
         { id: 'grammar_language_review', label: 'Grammar Review' },
@@ -98,7 +112,7 @@ const Upload = () => {
         formData.append('agent', agentId);
 
         try {
-            const response = await axios.post(`http://localhost:5004/process`, formData, {
+            const response = await axios.post(`${secondBaseURL}/process`, formData, {
                 headers: { 'Content-Type': 'multipart/form-data' }
             });
 
@@ -116,7 +130,7 @@ const Upload = () => {
         } catch (error) {
             setLoadingDetailedReport(false);
             setDisabledAgents([]);
-            setError(null); // Clear error state
+            setError(null);
             if (error.response && error.response.status === 401) {
                 toast.error('Invalid OpenAI API key. Please check your API key configuration.');
             } else {
@@ -155,7 +169,6 @@ const Upload = () => {
                         >
                             {loadingReportSummary ? "Uploading..." : "Upload PDF"}
                         </button>
-
                     </Col>
                 </Row>
                 {loadingReportSummary && (
@@ -164,8 +177,6 @@ const Upload = () => {
                     </div>
                 )}
                 <div className="text-center">
-
-
                     {showSubscriptionButton && (
                         <div>
                             <button
@@ -176,6 +187,7 @@ const Upload = () => {
                             </button>
                         </div>
                     )}
+
                 </div>
                 {reportContent && typeof reportContent === 'number' && (
                     <Card className="mt-4 bg-transparent text-white text-center" style={{ border: "2px solid #ffa500" }}>
@@ -220,6 +232,17 @@ const Upload = () => {
                         </Card.Body>
                     </Card>
                 )}
+                {reportContent && (
+                    <div className="text-center">
+                        <button
+                            onClick={handleClear}
+                            className="btn btn-warning mt-3"
+                        >
+                            Clear
+                        </button>
+                    </div>
+                )}
+
             </Container>
         </div>
     );
