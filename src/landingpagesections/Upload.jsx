@@ -1,6 +1,6 @@
 "use client"
 import React, { useState } from 'react';
-import { Col, Container, Row, Card, Spinner, Button } from 'react-bootstrap';
+import { Col, Container, Row, Card, Spinner, Button, OverlayTrigger, Tooltip } from 'react-bootstrap'; // Import OverlayTrigger and Tooltip
 import { useDropzone } from "react-dropzone";
 import { IoCloudUpload } from "react-icons/io5";
 import { toast } from 'react-toastify';
@@ -203,20 +203,36 @@ const Upload = () => {
                     </Card>
                 )}
 
-                {!isSubscribed && (
+                {isSubscribed && (
                     <Row className="mt-4 paper-upload">
-                        {agentOptions.map(({ id, label, disabled }) => { // Destructure 'disabled' from agentOptions
+                        {agentOptions.map(({ id, label, disabled }) => {
                             return (
                                 <Col xs={6} md={4} className="mb-2" key={id}>
-                                    <Button
-                                        onClick={() => handleAgentClick(id)}
-                                        variant={activeAgent === id ? 'primary' : 'secondary'}
-                                        className={activeAgent === id ? 'w-100 active-func' : 'w-100'}
-                                        disabled={disabled} // Use the correct 'disabled' property
-                                        style={{ opacity: disabled ? 0.5 : 1, cursor: disabled ? 'not-allowed' : 'pointer' }} // Adjust styles based on 'disabled'
+                                    <OverlayTrigger
+                                        overlay={
+                                            disabled ? (
+                                                <Tooltip id={`tooltip-${id}`}>
+                                                    You need to buy a subscription to use this feature.
+                                                </Tooltip>
+                                            ) : <></>
+                                        }
                                     >
-                                        {label}
-                                    </Button>
+                                        <span >
+                                            <Button
+                                                onClick={() => handleAgentClick(id)}
+                                                variant={activeAgent === id ? 'primary' : 'secondary'}
+                                                className={activeAgent === id ? 'w-100 active-func' : 'w-100'}
+                                                disabled={disabled}
+                                                style={{
+                                                    opacity: disabled ? 0.5 : 1,
+                                                    cursor: disabled ? 'not-allowed' : 'pointer',
+                                                    pointerEvents: disabled ? 'none' : 'auto'
+                                                }}
+                                            >
+                                                {label}
+                                            </Button>
+                                        </span>
+                                    </OverlayTrigger>
                                 </Col>
                             );
                         })}
