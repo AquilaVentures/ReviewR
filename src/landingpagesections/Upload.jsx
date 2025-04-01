@@ -12,7 +12,8 @@ const Upload = () => {
     const [selectedFile, setSelectedFile] = useState(null);
     const [fileInfo, setFileInfo] = useState('');
     const [reportContent, setReportContent] = useState('');
-    const [loading, setLoading] = useState(false);
+    const [loadingReportSummary, setLoadingReportSummary] = useState(false);
+    const [loadingDetailedReport, setLoadingDetailedReport] = useState(false);
     const [error, setError] = useState(null);
     const [isSubscribed, setIsSubscribed] = useState(false);
     const [activeAgent, setActiveAgent] = useState(null);
@@ -41,7 +42,7 @@ const Upload = () => {
         const formData = new FormData();
         formData.append("file", selectedFile);
 
-        setLoading(true);
+        setLoadingReportSummary(true);
         setError(null);
         try {
             const res = await axios.post(`${baseURL}/upload-pdf/`, formData, {
@@ -53,10 +54,11 @@ const Upload = () => {
             setReportContent(businessScore);
             setShowSubscriptionButton(true);
         } catch (err) {
-            setError(err.response ? err.response.data.detail : "An error occurred");
+            setError(null); // Clear error state
+            toast.error(err.response ? err.response.data.detail : "An error occurred");
             setReportContent('');
         } finally {
-            setLoading(false);
+            setLoadingReportSummary(false);
         }
     };
 
@@ -88,7 +90,7 @@ const Upload = () => {
 
         setActiveAgent(agentId);
         setDisabledAgents(agentOptions.map((agent) => agent.id).filter(id => id !== agentId));
-        setLoading(true);
+        setLoadingDetailedReport(true);
         toast.dismiss();
 
         const formData = new FormData();
@@ -100,7 +102,7 @@ const Upload = () => {
                 headers: { 'Content-Type': 'multipart/form-data' }
             });
 
-            setLoading(false);
+            setLoadingDetailedReport(false);
             setDisabledAgents([]);
 
             if (response.status === 200) {
@@ -112,8 +114,9 @@ const Upload = () => {
                 toast.error(response.data.error || 'An error occurred while processing the file.');
             }
         } catch (error) {
-            setLoading(false);
+            setLoadingDetailedReport(false);
             setDisabledAgents([]);
+            setError(null); // Clear error state
             if (error.response && error.response.status === 401) {
                 toast.error('Invalid OpenAI API key. Please check your API key configuration.');
             } else {
@@ -148,28 +151,33 @@ const Upload = () => {
                         <button
                             onClick={handleUpload}
                             className="btn btn-warning mt-3"
-                            disabled={loading}
+                            disabled={loadingReportSummary}
                         >
-                            {loading ? "Uploading..." : "Upload PDF"}
+                            {loadingReportSummary ? "Uploading..." : "Upload PDF"}
                         </button>
-                        {showSubscriptionButton && (
-                            <div>
-                                <button
-                                    className="btn btn-warning mt-3"
-                                    onClick={handleSubscription}
-                                >
-                                    Activate Subscription
-                                </button>
-                            </div>
-                        )}
+
                     </Col>
                 </Row>
-                {loading && (
+                {loadingReportSummary && (
                     <div className="text-center mt-4">
                         <Spinner color='#ffa500' animation="border" style={{ color: "#ffa500" }} />
                     </div>
                 )}
-                {reportContent && (
+                <div className="text-center">
+
+
+                    {showSubscriptionButton && (
+                        <div>
+                            <button
+                                className="btn btn-warning mt-3"
+                                onClick={handleSubscription}
+                            >
+                                Activate Subscription
+                            </button>
+                        </div>
+                    )}
+                </div>
+                {reportContent && typeof reportContent === 'number' && (
                     <Card className="mt-4 bg-transparent text-white text-center" style={{ border: "2px solid #ffa500" }}>
                         <Card.Body>
                             <h3 className='mb-0'>
@@ -184,11 +192,6 @@ const Upload = () => {
                     </Card>
                 )}
 
-                {error && (
-                    <div className="text-center mt-4 text-danger">
-                        <p>{error}</p>
-                    </div>
-                )}
                 {isSubscribed && (
                     <Row className="mt-4 paper-upload">
                         {agentOptions.map(({ id, label }) => (
@@ -205,12 +208,12 @@ const Upload = () => {
                         ))}
                     </Row>
                 )}
-                {loading && (
+                {loadingDetailedReport && (
                     <div className="text-center mt-4">
                         <Spinner color='#ffa500' animation="border" style={{ color: "#ffa500" }} />
                     </div>
                 )}
-                {reportContent && (
+                {reportContent && typeof reportContent !== 'number' && (
                     <Card className="mt-4 bg-transparent text-white" style={{ border: "2px solid #ffa500" }}>
                         <Card.Body>
                             <div dangerouslySetInnerHTML={{ __html: reportContent }} />
