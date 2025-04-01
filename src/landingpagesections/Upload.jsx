@@ -20,6 +20,7 @@ const Upload = () => {
     const [activeAgent, setActiveAgent] = useState(null);
     const [disabledAgents, setDisabledAgents] = useState([]);
     const [showSubscriptionButton, setShowSubscriptionButton] = useState(false);
+    const [loadingSubscription, setLoadingSubscription] = useState(false); // New state for subscription loading
 
     const onDrop = (acceptedFiles) => {
         const file = acceptedFiles[0];
@@ -27,6 +28,7 @@ const Upload = () => {
             setSelectedFile(file);
             setFileInfo(`Selected file: ${file.name}`);
             toast.dismiss();
+            handleUpload(file); 
         } else {
             toast.error('Please select a valid PDF file.');
             setSelectedFile(null);
@@ -34,14 +36,15 @@ const Upload = () => {
         }
     };
 
-    const handleUpload = async () => {
-        if (!selectedFile) {
+    const handleUpload = async (file) => {
+        const uploadFile = file || selectedFile;
+        if (!uploadFile) {
             toast.error("Please select a file first!");
             return;
         }
 
         const formData = new FormData();
-        formData.append("file", selectedFile);
+        formData.append("file", uploadFile);
 
         setLoadingReportSummary(true);
         setError(null);
@@ -64,7 +67,11 @@ const Upload = () => {
     };
 
     const handleSubscription = () => {
-        setIsSubscribed(true);
+        setLoadingSubscription(true); // Set loading state to true
+        setTimeout(() => {
+            setIsSubscribed(true);
+            setLoadingSubscription(false); // Reset loading state after subscription is activated
+        }, 2000); // Simulate a delay for the subscription process
     };
 
     const handleClear = () => {
@@ -162,13 +169,6 @@ const Upload = () => {
                                 {fileInfo && <p className="text-white mt-3">{fileInfo}</p>}
                             </Card>
                         </div>
-                        <button
-                            onClick={handleUpload}
-                            className="btn btn-warning mt-3"
-                            disabled={loadingReportSummary}
-                        >
-                            {loadingReportSummary ? "Uploading..." : "Upload PDF"}
-                        </button>
                     </Col>
                 </Row>
                 {loadingReportSummary && (
@@ -182,8 +182,9 @@ const Upload = () => {
                             <button
                                 className="btn btn-warning mt-3"
                                 onClick={handleSubscription}
+                                disabled={loadingSubscription} // Disable button while loading
                             >
-                                Activate Subscription
+                                {loadingSubscription ? "Reviewing..." : "Review My Research"} {/* Update button text */}
                             </button>
                         </div>
                     )}
