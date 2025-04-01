@@ -174,20 +174,6 @@ const Upload = () => {
                         <Spinner color='#ffa500' animation="border" style={{ color: "#ffa500" }} />
                     </div>
                 )}
-                <div className="text-center">
-                    {showSubscriptionButton && (
-                        <div>
-                            <button
-                                className="btn btn-warning mt-3"
-                                onClick={handleSubscription}
-                                disabled={loadingSubscription} // Disable button while loading
-                            >
-                                {loadingSubscription ? "Reviewing..." : "Review My Research"} {/* Update button text */}
-                            </button>
-                        </div>
-                    )}
-
-                </div>
                 {reportContent && typeof reportContent === 'number' && (
                     <Card className="mt-4 bg-transparent text-white text-center" style={{ border: "2px solid #ffa500" }}>
                         <Card.Body>
@@ -202,6 +188,21 @@ const Upload = () => {
                         </Card.Body>
                     </Card>
                 )}
+
+                <div className="text-center">
+                    {showSubscriptionButton && (
+                        <div>
+                            <button
+                                className="btn btn-warning mt-3"
+                                onClick={handleSubscription}
+                                disabled={loadingSubscription} // Disable button while loading
+                            >
+                                {loadingSubscription ? "Reviewing..." : "Review My Research"} {/* Update button text */}
+                            </button>
+                        </div>
+                    )}
+
+                </div>
 
                 {isSubscribed && (
                     <Row className="mt-4 paper-upload">
