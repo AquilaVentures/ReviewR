@@ -55,7 +55,7 @@ const Upload = () => {
                 },
             });
 
-            console.log("score review",res)
+            console.log("score review", res)
             const businessScore = res.data.business_dic?.abstracts?.[0]?.score;
             setReportContent(businessScore);
             setShowSubscriptionButton(true);
@@ -87,18 +87,18 @@ const Upload = () => {
 
     const { getRootProps, getInputProps } = useDropzone({ onDrop, multiple: false });
     const agentOptions = [
-        { id: 'grammar_language_review', label: 'Grammar Review' },
-        { id: 'limitations_future_work', label: 'Limitations & Future Work' },
-        { id: 'literature_review', label: 'Literature Review' },
-        { id: 'methodology_evaluation', label: 'Methodology' },
-        { id: 'originality_novelty', label: 'Originality & Novelty' },
-        { id: 'relevance_scope', label: 'Relevance & Scope' },
-        { id: 'data_results_validation', label: 'Data & Results Validation' },
-        { id: 'structure_formatting', label: 'Structure & Formatting' },
-        { id: 'abstract_review', label: 'Abstract Review' },
-        { id: 'citation_review', label: 'Citation Review' },
-        { id: 'python_code_agent007', label: 'Python Coding v1' },
-        { id: 'python_code_agent69', label: 'Python Coding v2' }
+        { id: 'grammar_language_review', label: 'Grammar Review', disabled: false },
+        { id: 'limitations_future_work', label: 'Limitations & Future Work', disabled: true },
+        { id: 'literature_review', label: 'Literature Review', disabled: true },
+        { id: 'methodology_evaluation', label: 'Methodology', disabled: true },
+        { id: 'originality_novelty', label: 'Originality & Novelty', disabled: true },
+        { id: 'relevance_scope', label: 'Relevance & Scope', disabled: true },
+        { id: 'data_results_validation', label: 'Data & Results Validation', disabled: true },
+        { id: 'structure_formatting', label: 'Structure & Formatting', disabled: true },
+        { id: 'abstract_review', label: 'Abstract Review', disabled: false },
+        { id: 'citation_review', label: 'Citation Review', disabled: true },
+        { id: 'python_code_agent007', label: 'Python Coding v1', disabled: true },
+        { id: 'python_code_agent69', label: 'Python Coding v2', disabled: true }
     ];
 
     const handleAgentClick = async (agentId) => {
@@ -203,22 +203,26 @@ const Upload = () => {
                     </Card>
                 )}
 
-                {isSubscribed && (
+                {!isSubscribed && (
                     <Row className="mt-4 paper-upload">
-                        {agentOptions.map(({ id, label }) => (
-                            <Col xs={6} md={4} className="mb-2" key={id}>
-                                <Button
-                                    onClick={() => handleAgentClick(id)}
-                                    variant={activeAgent === id ? 'primary' : 'secondary'}
-                                    className={activeAgent === id ? 'w-100 active-func' : 'w-100'}
-                                    disabled={disabledAgents.includes(id)}
-                                >
-                                    {label}
-                                </Button>
-                            </Col>
-                        ))}
+                        {agentOptions.map(({ id, label, disabled }) => { // Destructure 'disabled' from agentOptions
+                            return (
+                                <Col xs={6} md={4} className="mb-2" key={id}>
+                                    <Button
+                                        onClick={() => handleAgentClick(id)}
+                                        variant={activeAgent === id ? 'primary' : 'secondary'}
+                                        className={activeAgent === id ? 'w-100 active-func' : 'w-100'}
+                                        disabled={disabled} // Use the correct 'disabled' property
+                                        style={{ opacity: disabled ? 0.5 : 1, cursor: disabled ? 'not-allowed' : 'pointer' }} // Adjust styles based on 'disabled'
+                                    >
+                                        {label}
+                                    </Button>
+                                </Col>
+                            );
+                        })}
                     </Row>
                 )}
+
                 {loadingDetailedReport && (
                     <div className="text-center mt-4">
                         <Spinner color='#ffa500' animation="border" style={{ color: "#ffa500" }} />
