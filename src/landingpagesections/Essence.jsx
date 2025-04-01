@@ -3,21 +3,21 @@ import React from 'react';
 import Image from 'next/image';
 import Heading from '../components/shared/Heading';
 import { Container } from 'react-bootstrap';
-import vision from "../../public/vision.jpeg";
-import forging from "../../public/forging.jpeg";
-import dynamic from "../../public/dynamic.jpeg";
-import canvas from "../../public/canvas.jpeg";
-import empower from "../../public/empower.jpeg";
-import artist from "../../public/artist.jpeg";
-import sculping from "../../public/sculping.jpeg";
+import hex1 from "../../public/hex1.jpeg";
+import hex2 from "../../public/hex2.jpeg";
+import hex3 from "../../public/hex3.jpeg";
+import hex4 from "../../public/hex4.jpeg";
+import hex5 from "../../public/hex5.jpeg";
+import hex6 from "../../public/hex6.jpeg";
+import hex7 from "../../public/hex7.jpeg";
 const honeycombData = [
-  { id: 1, imageUrl: vision, title: 'AI-driven progress' },
-  { id: 2, imageUrl: dynamic, title: 'Boost startup success' },
-  { id: 3, imageUrl: forging, title: 'Global knowledge network' },
-  { id: 4, imageUrl: canvas, title: 'Relentless learning' },
-  { id: 5, imageUrl: empower, title: 'Power of network effects' },
-  { id: 6, imageUrl: artist, title: 'Speedy Expert Insights' },
-  { id: 7, imageUrl: sculping, title: 'Seamless Industry Bridge ' },
+  { id: 1, imageUrl: hex1, title: 'AI-driven progress' },
+  { id: 2, imageUrl: hex2, title: 'Boost startup success' },
+  { id: 3, imageUrl: hex3, title: 'Global knowledge network' },
+  { id: 4, imageUrl: hex4, title: 'Relentless learning' },
+  { id: 5, imageUrl: hex5, title: 'Power of network effects' },
+  { id: 6, imageUrl: hex6, title: 'Speedy Expert Insights' },
+  { id: 7, imageUrl: hex7, title: 'Seamless Industry Bridge ' },
 ];
 
 const Essence = () => {

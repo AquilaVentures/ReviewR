@@ -45,7 +45,7 @@ const Upload = () => {
                     "Content-Type": "multipart/form-data",
                 },
             });
-            const businessScore = res.data.business_dic?.abstracts?.[0]?.score; // Extract the score
+            const businessScore = res.data.business_dic?.abstracts?.[0]?.score;
             setReportContent(businessScore); // Set only the score
         } catch (err) {
             setError(err.response ? err.response.data.detail : "An error occurred");
@@ -96,7 +96,7 @@ const Upload = () => {
                 {reportContent && (
                     <Card className="mt-4 bg-transparent text-white text-center" style={{ border: "2px solid #ffa500" }}>
                         <Card.Body>
-                            <h3 className='mb-0'>Business Score: {reportContent}</h3> {/* Display only the score */}
+                            <h3 className='mb-0'>Business Score: {reportContent}</h3>
                         </Card.Body>
                     </Card>
                 )}
