@@ -7,7 +7,6 @@ import { toast } from 'react-toastify';
 import axios from 'axios';
 
 const baseURL = process.env.NEXT_PUBLIC_BASE_URL;
-console.log("baseURL", baseURL)
 const Upload = () => {
     const [selectedFile, setSelectedFile] = useState(null);
     const [fileInfo, setFileInfo] = useState('');
@@ -46,7 +45,7 @@ const Upload = () => {
                 },
             });
             const businessScore = res.data.business_dic?.abstracts?.[0]?.score;
-            setReportContent(businessScore); // Set only the score
+            setReportContent(businessScore);
         } catch (err) {
             setError(err.response ? err.response.data.detail : "An error occurred");
             setReportContent('');
@@ -63,7 +62,7 @@ const Upload = () => {
                 <div className="text-center mb-5">
                     <h2 className='fw-bold text-white'>Get Your AI-driven Review Here & Reach 1.000s of Startups</h2>
                     <p className='text-white my-3'>
-                    Upload your research and we’ll immediately do an AI powered review. Determining its business value & relevance for startups and scale ups, while sharing with you high quality and fast academic peer review insights.
+                        Upload your research and we’ll immediately do an AI powered review. Determining its business value & relevance for startups and scale ups, while sharing with you high quality and fast academic peer review insights.
                     </p>
                 </div>
                 <Row className='mt-4'>
@@ -74,7 +73,7 @@ const Upload = () => {
                                     <input {...getInputProps()} />
                                     <IoCloudUpload size={40} color='#ffa500' />
                                     <p className="text-white">Get rigorous academic feedback, while highly relevant research get shared with the community through AI driven blogs, newsletters, interviews and blogposts. </p>
-                                    <p className="text-white">Drag & drop files here, or click to select files</p>
+                                    <p className="text-white m-0">Drag & drop files here, or click to select files</p>
                                 </div>
                                 {fileInfo && <p className="text-white mt-3">{fileInfo}</p>}
                             </Card>
