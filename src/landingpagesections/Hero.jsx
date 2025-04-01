@@ -105,13 +105,15 @@ export default function Hero() {
                             <TypeAnimation
                                 sequence={[
 
+                                    'Faster & Higher Quality Academic Reviews.',
+                                    1000,
                                     'Bridge Research & Industry: AI in Action.',
+                                    1000,
+                                    'Get Published Faster.',
                                     1000,
                                     'Fuels Startups with Cutting-Edge Academic Insights.',
                                     1000,
                                     'Turns Academic Breakthroughs into Business Knowledge.',
-                                    1000,
-                                    'Where Research Feeds Rapid Scale.',
                                     1000,
                                     'Where AI driven speed & disruption.',
                                     1000,
