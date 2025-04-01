@@ -255,6 +255,40 @@ const Upload = () => {
                         </Card.Body>
                     </Card>
                 )}
+                {isSubscribed&&reportContent && (
+                    <div className="text-center mt-4">
+                        <h4 className="text-white">🚀 Join the full beta waiting list or pre-order now with a 75% discount! 🚀</h4>
+                        <p className="text-white">Get early access to premium features, advanced AI reviews, and more.</p>
+
+                        <div className="mt-3">
+                            <Col xs={7} className='mx-auto'>
+                                <Row>
+                                    <Col xs={6}>
+                                        <Button
+                                            variant="warning"
+                                            className="py-2 w-100"
+                                            onClick={() => handleUserInterest("join the waiting list")}
+                                        >
+                                            Join Waiting List
+                                        </Button>
+                                    </Col>
+                                    <Col xs={6}>
+                                        <Button
+                                            variant="warning"
+                                            className="py-2 w-100"
+                                            onClick={() => handleUserInterest("pre-order with 75% discount")}
+
+                                        >
+                                            Pre-Order Now (75% Off)
+                                        </Button>
+                                    </Col>
+                                </Row>
+                            </Col>
+
+                        </div>
+
+                    </div>
+                )}
                 {reportContent && (
                     <div className="text-center">
                         <button
