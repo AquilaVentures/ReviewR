@@ -28,7 +28,7 @@ const Upload = () => {
             setSelectedFile(file);
             setFileInfo(`Selected file: ${file.name}`);
             toast.dismiss();
-            handleUpload(file); 
+            handleUpload(file);
         } else {
             toast.error('Please select a valid PDF file.');
             setSelectedFile(null);
@@ -54,6 +54,8 @@ const Upload = () => {
                     "Content-Type": "multipart/form-data",
                 },
             });
+
+            console.log("score review",res)
             const businessScore = res.data.business_dic?.abstracts?.[0]?.score;
             setReportContent(businessScore);
             setShowSubscriptionButton(true);
@@ -67,11 +69,7 @@ const Upload = () => {
     };
 
     const handleSubscription = () => {
-        setLoadingSubscription(true); // Set loading state to true
-        setTimeout(() => {
-            setIsSubscribed(true);
-            setLoadingSubscription(false); // Reset loading state after subscription is activated
-        }, 2000); // Simulate a delay for the subscription process
+        setIsSubscribed(true);
     };
 
     const handleClear = () => {
