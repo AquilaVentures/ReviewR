@@ -61,19 +61,19 @@ const Upload = () => {
         <div className='herobg py-5'>
             <Container className='pt-5'>
                 <div className="text-center mb-5">
-                    <h2 className='fw-bold text-white'>Seamlessly Analyze Your Business Documents</h2>
+                    <h2 className='fw-bold text-white'>Get Your AI-driven Review Here & Reach 1.000s of Startups</h2>
                     <p className='text-white my-3'>
-                        Upload your files to get instant insights and business relevance scores powered by AI.
+                    Upload your research and we’ll immediately do an AI powered review. Determining its business value & relevance for startups and scale ups, while sharing with you high quality and fast academic peer review insights.
                     </p>
                 </div>
                 <Row className='mt-4'>
                     <Col xs={12} lg={8} className='mx-auto text-center'>
                         <div className="drop-container">
-                            <Card className="bg-transparent text-center py-5" style={{ border: "3px dashed #ffa500", cursor: "pointer" }}>
+                            <Card className="bg-transparent text-center p-5" style={{ border: "3px dashed #ffa500", cursor: "pointer" }}>
                                 <div {...getRootProps()} className="">
                                     <input {...getInputProps()} />
                                     <IoCloudUpload size={40} color='#ffa500' />
-                                    <p className="text-white">Check your paper on business relevance and get a blog posted about it?</p>
+                                    <p className="text-white">Get rigorous academic feedback, while highly relevant research get shared with the community through AI driven blogs, newsletters, interviews and blogposts. </p>
                                     <p className="text-white">Drag & drop files here, or click to select files</p>
                                 </div>
                                 {fileInfo && <p className="text-white mt-3">{fileInfo}</p>}

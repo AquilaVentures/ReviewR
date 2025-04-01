@@ -56,7 +56,7 @@ const Blogs = () => {
                     <div className="text-center my-4">
                         <h2 className='fw-bold text-white'>OUR BLOGS</h2>
                         <p className='text-white my-3'>
-                            Stay Updated with the Latest Trends and Insights
+                        Stay updated with the Latest AI driven Startup Trends & Insights
                         </p>
                     </div>
                     <Swiper

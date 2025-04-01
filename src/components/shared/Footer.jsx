@@ -8,7 +8,7 @@ const Footer = () => {
   const links = [
     {
       id: 1,
-      link: "#",
+      link: "https://www.linkedin.com/in/fredericpattyn/",
       icon: <FaLinkedin size={24} className="text-white" />,
     },
    

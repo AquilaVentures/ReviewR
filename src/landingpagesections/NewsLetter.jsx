@@ -26,9 +26,9 @@ const NewsLetter = () => {
                 <Row>
                     <Col xs={12} lg={8} className='mx-auto'>
                         <div className='text-center py-4'>
-                            <h2 className='fw-bold text-white'>Subscribe to our Newsletter</h2>
+                            <h2 className='fw-bold text-white'>Give more qualitive reviews than our AI and GET PAID!</h2>
                             <p className='text-white my-3'>
-                                Stay updated with the latest news, trends, and updates. Subscribe to our newsletter and never miss out on important insights and offers.
+                            Stay updated with the latest AI driven startup research and insights by the best academics in the world. Follow the journey of academic breakthroughs, the disruption of a dinosaur industry and never miss out on a scientific breakthrough that could give you an edge while building your venture! 
                             </p>
                             <Form className='d-flex justify-content-center mt-4' onSubmit={handleSubmit}>
                                 <div className='newsletterouter' style={{ display: "flex", alignItems: "center", border: "1px solid #FFB300", borderRadius: "60px", padding: "5px 8px" }}>
