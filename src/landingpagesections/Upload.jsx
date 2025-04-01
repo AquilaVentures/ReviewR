@@ -178,6 +178,9 @@ const Upload = () => {
                     <Card className="mt-4 bg-transparent text-white text-center" style={{ border: "2px solid #ffa500" }}>
                         <Card.Body>
                             <h3 className='mb-0'>
+                                {`Business Score: ${reportContent}`}
+                            </h3>
+                            <h3 className='mb-0'>
                                 {reportContent <= 6
                                     ? "Thank you for uploading your research."
                                     : reportContent <= 8
