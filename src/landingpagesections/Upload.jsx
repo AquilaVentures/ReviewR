@@ -95,6 +95,20 @@ const Upload = () => {
         handleUpload(selectedFile); // Proceed with file upload
     };
 
+    const handleUserInterest = async (action) => {
+        if (action === "join the waiting list" && email) {
+            try {
+                const response = await axios.post(`${baseURL}/waitlist/subscribe`, { email });
+
+                toast.success("Successfully joined the waiting list!");
+
+            } catch (error) {
+                toast.error(error?.response?.data?.detail);
+                console.error("Error:", error);
+            }
+        }
+    };
+
     const { getRootProps, getInputProps } = useDropzone({ onDrop, multiple: false });
     const agentOptions = [
         { id: 'grammar_language_review', label: 'Grammar Review', disabled: false },
@@ -265,7 +279,7 @@ const Upload = () => {
                         </Card.Body>
                     </Card>
                 )}
-                {isSubscribed && reportContent && (
+                {reportContent && (
                     <div className="text-center mt-4">
                         <h4 className="text-white">🚀 Join the full beta waiting list or pre-order now with a 75% discount! 🚀</h4>
                         <p className="text-white">Get early access to premium features, advanced AI reviews, and more.</p>
