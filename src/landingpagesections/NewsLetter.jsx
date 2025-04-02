@@ -11,20 +11,21 @@ const NewsLetter = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        const loadingToastId = toast.loading("Submitting...");
         try {
             const response = await axios.post(`${baseURL}/newsletter/subscribe`, { email }, {
                 headers: {
                     "Content-Type": "application/json",
                 },
             });
-            toast.success(response.data.message || 'Thank you for subscribing!');
+            toast.update(loadingToastId, { render: response.data.message || 'Thank you for subscribing!', type: "success", isLoading: false, autoClose: 3000 });
             setEmail('');
         } catch (error) {
             const errorMessage = error.response?.data?.message || error.response?.data?.detail;
             if (errorMessage === "Email is already subscribed.") {
-                toast.info("You are already subscribed to the newsletter.");
+                toast.update(loadingToastId, { render: "You are already subscribed to the newsletter.", type: "info", isLoading: false, autoClose: 3000 });
             } else {
-                toast.error(errorMessage || 'An error occurred. Please try again later.');
+                toast.update(loadingToastId, { render: errorMessage || 'An error occurred. Please try again later.', type: "error", isLoading: false, autoClose: 3000 });
             }
         }
     };

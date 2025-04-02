@@ -97,13 +97,12 @@ const Upload = () => {
 
     const handleUserInterest = async (action) => {
         if (action === "join the waiting list" && email) {
+            const loadingToastId = toast.loading("Processing...");
             try {
                 const response = await axios.post(`${baseURL}/waitlist/subscribe`, { email });
-
-                toast.success("Successfully joined the waiting list!");
-
+                toast.update(loadingToastId, { render: "Successfully joined the waiting list!", type: "success", isLoading: false, autoClose: 3000 });
             } catch (error) {
-                toast.error(error?.response?.data?.detail);
+                toast.update(loadingToastId, { render: error?.response?.data?.detail || "An error occurred", type: "error", isLoading: false, autoClose: 3000 });
                 console.error("Error:", error);
             }
         }
