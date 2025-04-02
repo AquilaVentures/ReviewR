@@ -67,6 +67,7 @@ const Upload = () => {
             setError(null); // Clear error state
             toast.error(err.response ? err.response.data.detail : "An error occurred");
             setReportContent('');
+            setEmail("")
         } finally {
             setLoadingReportSummary(false);
         }

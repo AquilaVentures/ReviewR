@@ -14,10 +14,11 @@ const page = () => {
       <ToastContainer />
       <Hero />
       <Vision />
-      <Upload />
-      <Counter />
-      <Blogs />
       <NewsLetter />
+      <Counter />
+      <Upload />
+      <Blogs />
+      
       <Essence />
      
       
