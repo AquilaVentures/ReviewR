@@ -1,11 +1,12 @@
 "use client"
 import React, { useState } from 'react';
-import { Col, Container, Row, Card, Spinner, Button, OverlayTrigger, Tooltip } from 'react-bootstrap'; // Import OverlayTrigger and Tooltip
+import { Col, Container, Row, Card, Spinner, Button, OverlayTrigger, Tooltip, Modal, Form } from 'react-bootstrap'; // Import Modal and Form
 import { useDropzone } from "react-dropzone";
 import { IoCloudUpload } from "react-icons/io5";
 import { toast } from 'react-toastify';
 import axios from 'axios';
 import { marked } from 'marked';
+import { MdClose } from "react-icons/md";
 
 const baseURL = process.env.NEXT_PUBLIC_BASE_URL;
 const secondBaseURL = process.env.NEXT_PUBLIC_SECOND_BASE_URL;
@@ -21,6 +22,8 @@ const Upload = () => {
     const [disabledAgents, setDisabledAgents] = useState([]);
     const [showSubscriptionButton, setShowSubscriptionButton] = useState(false);
     const [loadingSubscription, setLoadingSubscription] = useState(false); // New state for subscription loading
+    const [showEmailModal, setShowEmailModal] = useState(false); // State to control modal visibility
+    const [email, setEmail] = useState(''); // State to store user email
 
     const onDrop = (acceptedFiles) => {
         const file = acceptedFiles[0];
@@ -28,7 +31,7 @@ const Upload = () => {
             setSelectedFile(file);
             setFileInfo(`Selected file: ${file.name}`);
             toast.dismiss();
-            handleUpload(file);
+            setShowEmailModal(true); // Show modal to input email
         } else {
             toast.error('Please select a valid PDF file.');
             setSelectedFile(null);
@@ -38,13 +41,14 @@ const Upload = () => {
 
     const handleUpload = async (file) => {
         const uploadFile = file || selectedFile;
-        if (!uploadFile) {
-            toast.error("Please select a file first!");
+        if (!uploadFile || !email) {
+            toast.error("Please select a file and enter your email!");
             return;
         }
 
         const formData = new FormData();
         formData.append("file", uploadFile);
+        formData.append("email", email); // Use user-provided email
 
         setLoadingReportSummary(true);
         setError(null);
@@ -83,6 +87,11 @@ const Upload = () => {
         setActiveAgent(null);
         setDisabledAgents([]);
         setShowSubscriptionButton(false);
+    };
+
+    const handleEmailSubmit = () => {
+        setShowEmailModal(false); // Close modal
+        handleUpload(selectedFile); // Proceed with file upload
     };
 
     const { getRootProps, getInputProps } = useDropzone({ onDrop, multiple: false });
@@ -164,7 +173,7 @@ const Upload = () => {
                                     <p className="text-white">Get rigorous academic feedback, while highly relevant research get shared with the community through AI driven blogs, newsletters, interviews and blogposts. </p>
                                     <p className="text-white m-0">Drag & drop files here, or click to select files</p>
                                 </div>
-                                {fileInfo && <p className="text-white mt-3">{fileInfo}</p>}
+                                {fileInfo && <p className="text-white mt-3 mb-0">{fileInfo}</p>}
                             </Card>
                         </div>
                     </Col>
@@ -255,7 +264,7 @@ const Upload = () => {
                         </Card.Body>
                     </Card>
                 )}
-                {isSubscribed&&reportContent && (
+                {isSubscribed && reportContent && (
                     <div className="text-center mt-4">
                         <h4 className="text-white">🚀 Join the full beta waiting list or pre-order now with a 75% discount! 🚀</h4>
                         <p className="text-white">Get early access to premium features, advanced AI reviews, and more.</p>
@@ -300,6 +309,34 @@ const Upload = () => {
                     </div>
                 )}
 
+                <Modal show={showEmailModal} centered >
+
+                    <Modal.Body className='herobg'>
+
+                        <div className="text-end">
+                            <MdClose onClick={() => setShowEmailModal(false)} color={"#ffa500"} size={20} style={{ cursor: "pointer" }} />
+                        </div>
+                        <Form>
+                            <Form.Group controlId="emailInput">
+                                <Form.Label className='text-white'>Email Address</Form.Label>
+                                <Form.Control
+                                    type="email"
+                                    placeholder="Enter your email"
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
+                                    className='bg-transparent text-white'
+                                />
+                            </Form.Group>
+                        </Form>
+                        <div className="my-3 text-white text-end">
+                            <Button variant="warning" onClick={handleEmailSubmit} disabled={!email}>
+                                Submit
+                            </Button>
+                        </div>
+
+                    </Modal.Body>
+
+                </Modal>
             </Container>
         </div>
     );
