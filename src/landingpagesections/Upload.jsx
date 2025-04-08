@@ -53,7 +53,7 @@ const Upload = () => {
         setLoadingReportSummary(true);
         setError(null);
         try {
-            const res = await axios.post(`${baseURL}/upload-pdf/`, formData, {
+            const res = await axios.post(`/api/upload-pdf`, formData, {
                 headers: {
                     "Content-Type": "multipart/form-data",
                 },
@@ -91,8 +91,8 @@ const Upload = () => {
     };
 
     const handleEmailSubmit = () => {
-        setShowEmailModal(false); // Close modal
-        handleUpload(selectedFile); // Proceed with file upload
+        setShowEmailModal(false);
+        handleUpload(selectedFile);
     };
 
     const handleUserInterest = async (action) => {
