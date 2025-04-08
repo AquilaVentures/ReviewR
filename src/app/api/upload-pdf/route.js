@@ -8,11 +8,7 @@ import { NextResponse } from 'next/server';
 import fs from 'fs/promises';
 import { extractTextFromFirstPage } from '@/lib/pdfUtils';
 import BusinessScore from '@/models/BusinessScore';
-export const config = {
-    api: {
-        bodyParser: false,
-    },
-};
+
 
 export async function POST(request) {
     await dbConnect();
