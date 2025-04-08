@@ -25,7 +25,8 @@ export async function POST(request) {
             );
         }
 
-        const uploadDir = path.join(process.cwd(), 'uploads');
+        const uploadDir = '/tmp/uploads';
+
 
         console.log('Upload directory:', uploadDir);
         await fs.mkdir(uploadDir, { recursive: true });
