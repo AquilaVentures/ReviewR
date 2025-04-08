@@ -53,9 +53,9 @@ const Upload = () => {
         setLoadingReportSummary(true);
         setError(null);
         try {
-            const res = await axios.post(`${NEXT_PUBLIC_BASE_URL}/api/upload-pdf`, formData, {
+            const res = await axios.post(`/api/upload-pdf`, formData, {
                 headers: {
-                    "Content-Type": "multipart/form-data", 
+                    "Content-Type": "multipart/form-data",
                 },
             });
 
