@@ -7,11 +7,6 @@ import path from 'path';
 
 const openai = new OpenAI(process.env.OPENAI_API_KEY);
 
-export const config = {
-    api: {
-        bodyParser: false,
-    },
-};
 
 export async function POST(request) {
     try {
