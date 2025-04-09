@@ -142,7 +142,7 @@ const Upload = () => {
         formData.append('agent', agentId);
 
         try {
-            const response = await axios.post(`${secondBaseURL}/process`, formData, {
+            const response = await axios.post('/api/reviewdoc', formData, {
                 headers: { 'Content-Type': 'multipart/form-data' }
             });
 
@@ -152,8 +152,6 @@ const Upload = () => {
             if (response.status === 200) {
                 toast.success('Review completed successfully.');
                 setReportContent(marked.parse(response.data.report_content.replace(/\n{2,}/g, '\n\n')));
-            } else if (response.data.error && response.data.error.includes('Incorrect API key provided')) {
-                toast.error('Invalid OpenAI API key. Please check your API key configuration.');
             } else {
                 toast.error(response.data.error || 'An error occurred while processing the file.');
             }
@@ -161,11 +159,7 @@ const Upload = () => {
             setLoadingDetailedReport(false);
             setDisabledAgents([]);
             setError(null);
-            if (error.response && error.response.status === 401) {
-                toast.error('Invalid OpenAI API key. Please check your API key configuration.');
-            } else {
-                toast.error('An unexpected error occurred.');
-            }
+            toast.error(error.response?.data?.error || 'An unexpected error occurred.');
             console.error('Error:', error);
         }
     };
@@ -354,7 +348,7 @@ const Upload = () => {
 
                 </Modal>
             </Container>
-              <ToastContainer />
+            <ToastContainer />
         </div>
     );
 };
