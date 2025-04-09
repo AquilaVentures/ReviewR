@@ -1,6 +1,6 @@
 {
     "functions": {
-     "api/upload-pdf": {
+      "api/upload-pdf.js": {
         "maxDuration": 60
       }
     }
