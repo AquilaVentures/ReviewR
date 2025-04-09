@@ -1,8 +1,0 @@
-{
-    "functions": {
-      "api/upload-pdf.js": {
-        "maxDuration": 60
-      }
-    }
-  }
-  
