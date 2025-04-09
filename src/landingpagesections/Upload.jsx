@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Col, Container, Row, Card, Spinner, Button, OverlayTrigger, Tooltip, Modal, Form } from 'react-bootstrap'; // Import Modal and Form
 import { useDropzone } from "react-dropzone";
 import { IoCloudUpload } from "react-icons/io5";
-import { toast } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
 import axios from 'axios';
 import { marked } from 'marked';
 import { MdClose } from "react-icons/md";
@@ -64,8 +64,10 @@ const Upload = () => {
             setReportContent(businessScore);
             setShowSubscriptionButton(true);
         } catch (err) {
+
+            console.log("error", err)
             setError(null); // Clear error state
-            toast.error(err.response ? err.response.data.detail : "An error occurred");
+            toast.error(err.response ? err.response.data.error : "An error occurred");
             setReportContent('');
             setEmail("")
         } finally {
@@ -352,6 +354,7 @@ const Upload = () => {
 
                 </Modal>
             </Container>
+              <ToastContainer />
         </div>
     );
 };

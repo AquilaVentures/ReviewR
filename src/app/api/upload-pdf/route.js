@@ -37,6 +37,16 @@ export async function POST(request) {
 
         const text = await extractTextFromFirstPage(filePath);
         const paperJsonData = await extractSinglePaperMetadataOpenAI(text);
+
+        // Check if a paper with the same title already exists
+        const existingPaper = await Paper.findOne({ title: paperJsonData.paper_title });
+        if (existingPaper) {
+            return NextResponse.json(
+                { error: 'Paper already exists.' },
+                { status: 400 }
+            );
+        }
+
         const businessDic = await getPapersScoreOpenAI([paperJsonData.abstract]);
 
         const authorEmailDict = {};

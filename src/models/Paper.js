@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 
 const PaperSchema = new mongoose.Schema({
-    title: { type: String, required: true },
+    title: { type: String, required: true,unique: true },
     abstract: String,
     source: String,
     pdf: String,
