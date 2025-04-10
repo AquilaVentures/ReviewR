@@ -17,8 +17,7 @@ const page = () => {
       <NewsLetter />
       <Counter />
       <Upload />
-      <Blogs />
-      
+      {/* <Blogs /> */}
       <Essence />
      
       
