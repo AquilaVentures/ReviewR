@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Col, Container, Row, Card, Spinner, Button, OverlayTrigger, Tooltip, Modal, Form } from 'react-bootstrap'; // Import Modal and Form
 import { useDropzone } from "react-dropzone";
 import { IoCloudUpload } from "react-icons/io5";
-import { toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 import axios from 'axios';
 import { marked } from 'marked';
 import { MdClose } from "react-icons/md";
@@ -53,7 +53,7 @@ const Upload = () => {
         setLoadingReportSummary(true);
         setError(null);
         try {
-            const res = await axios.post(`/api/upload-pdf`, formData, {
+            const res = await axios.post(`${baseURL}/upload-pdf/`, formData, {
                 headers: {
                     "Content-Type": "multipart/form-data",
                 },
@@ -64,10 +64,8 @@ const Upload = () => {
             setReportContent(businessScore);
             setShowSubscriptionButton(true);
         } catch (err) {
-
-            console.log("error", err)
             setError(null); // Clear error state
-            toast.error(err.response ? err.response.data.error : "An error occurred");
+            toast.error(err.response ? err.response.data.detail : "An error occurred");
             setReportContent('');
             setEmail("")
         } finally {
@@ -93,21 +91,8 @@ const Upload = () => {
     };
 
     const handleEmailSubmit = () => {
-        setShowEmailModal(false);
-        handleUpload(selectedFile);
-    };
-
-    const handleUserInterest = async (action) => {
-        if (action === "join the waiting list" && email) {
-            const loadingToastId = toast.loading("Processing...");
-            try {
-                const response = await axios.post(`${baseURL}/waitlist/subscribe`, { email });
-                toast.update(loadingToastId, { render: "Successfully joined the waiting list!", type: "success", isLoading: false, autoClose: 3000 });
-            } catch (error) {
-                toast.update(loadingToastId, { render: error?.response?.data?.detail || "An error occurred", type: "error", isLoading: false, autoClose: 3000 });
-                console.error("Error:", error);
-            }
-        }
+        setShowEmailModal(false); // Close modal
+        handleUpload(selectedFile); // Proceed with file upload
     };
 
     const { getRootProps, getInputProps } = useDropzone({ onDrop, multiple: false });
@@ -142,7 +127,7 @@ const Upload = () => {
         formData.append('agent', agentId);
 
         try {
-            const response = await axios.post('/api/reviewdoc', formData, {
+            const response = await axios.post(`${secondBaseURL}/process`, formData, {
                 headers: { 'Content-Type': 'multipart/form-data' }
             });
 
@@ -152,6 +137,8 @@ const Upload = () => {
             if (response.status === 200) {
                 toast.success('Review completed successfully.');
                 setReportContent(marked.parse(response.data.report_content.replace(/\n{2,}/g, '\n\n')));
+            } else if (response.data.error && response.data.error.includes('Incorrect API key provided')) {
+                toast.error('Invalid OpenAI API key. Please check your API key configuration.');
             } else {
                 toast.error(response.data.error || 'An error occurred while processing the file.');
             }
@@ -159,7 +146,11 @@ const Upload = () => {
             setLoadingDetailedReport(false);
             setDisabledAgents([]);
             setError(null);
-            toast.error(error.response?.data?.error || 'An unexpected error occurred.');
+            if (error.response && error.response.status === 401) {
+                toast.error('Invalid OpenAI API key. Please check your API key configuration.');
+            } else {
+                toast.error('An unexpected error occurred.');
+            }
             console.error('Error:', error);
         }
     };
@@ -274,7 +265,7 @@ const Upload = () => {
                         </Card.Body>
                     </Card>
                 )}
-                {reportContent && (
+                {isSubscribed && reportContent && (
                     <div className="text-center mt-4">
                         <h4 className="text-white">🚀 Join the full beta waiting list or pre-order now with a 75% discount! 🚀</h4>
                         <p className="text-white">Get early access to premium features, advanced AI reviews, and more.</p>
@@ -348,7 +339,6 @@ const Upload = () => {
 
                 </Modal>
             </Container>
-            <ToastContainer />
         </div>
     );
 };
