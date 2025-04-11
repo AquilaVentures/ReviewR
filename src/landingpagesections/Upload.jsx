@@ -155,6 +155,19 @@ const Upload = () => {
         }
     };
 
+    const handleUserInterest = async (action) => {
+        if (action === "join the waiting list" && email) {
+            const loadingToastId = toast.loading("Processing...");
+            try {
+                const response = await axios.post(`${baseURL}/waitlist/subscribe`, { email });
+                toast.update(loadingToastId, { render: "Successfully joined the waiting list!", type: "success", isLoading: false, autoClose: 3000 });
+            } catch (error) {
+                toast.update(loadingToastId, { render: error?.response?.data?.detail || "An error occurred", type: "error", isLoading: false, autoClose: 3000 });
+                console.error("Error:", error);
+            }
+        }
+    };
+
     return (
         <div className='herobg py-5'>
             <Container className='pt-5'>
