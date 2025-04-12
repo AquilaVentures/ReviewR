@@ -8,6 +8,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import Blogs from '@/landingpagesections/Blogs'
 import NewsLetter from '@/landingpagesections/NewsLetter'
 import Upload from '@/landingpagesections/Upload'
+import NewsLetterNew from '@/landingpagesections/NewsLetterNew'
 const page = () => {
   return (
     <>
@@ -19,6 +20,7 @@ const page = () => {
       <Upload />
       {/* <Blogs /> */}
       <Essence />
+      <NewsLetterNew/>
      
       
 
