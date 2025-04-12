@@ -286,7 +286,7 @@ const Upload = () => {
                         <div className="mt-3">
                             <Col xs={7} className='mx-auto'>
                                 <Row>
-                                    <Col xs={6}>
+                                    <Col xs={6} className='mx-auto'>
                                         <Button
                                             variant="warning"
                                             className="py-2 w-100"
@@ -295,7 +295,7 @@ const Upload = () => {
                                             Join Waiting List
                                         </Button>
                                     </Col>
-                                    <Col xs={6}>
+                                    {/* <Col xs={6}>
                                         <Button
                                             variant="warning"
                                             className="py-2 w-100"
@@ -304,7 +304,7 @@ const Upload = () => {
                                         >
                                             Pre-Order Now (75% Off)
                                         </Button>
-                                    </Col>
+                                    </Col> */}
                                 </Row>
                             </Col>
 
