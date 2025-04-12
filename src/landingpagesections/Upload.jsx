@@ -299,7 +299,7 @@ const Upload = () => {
                                         <Button
                                             variant="warning"
                                             className="py-2 w-100"
-                                            onClick={() => handleUserInterest("pre-order with 75% discount")}
+                                            onClick={() => handleUserInterest("join the waiting list")}
 
                                         >
                                             Pre-Order Now (75% Off)
