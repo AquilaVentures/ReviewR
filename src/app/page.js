@@ -20,7 +20,7 @@ const page = () => {
       <Upload />
       {/* <Blogs /> */}
       <Essence />
-      <NewsLetterNew/>
+      {/* <NewsLetterNew/> */}
      
       
 

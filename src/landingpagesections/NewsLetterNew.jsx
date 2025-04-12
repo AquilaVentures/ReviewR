@@ -18,7 +18,7 @@ const NewsLetterNew = () => {
                     "Content-Type": "application/json",
                 },
             });
-            toast.update(loadingToastId, { render: response.data.message || 'Thank you for subscribing!', type: "success", isLoading: false, autoClose: 3000 });
+            toast.update(loadingToastId, { render: response.data.message || 'Thank you for subscribing to our newsletter!', type: "success", isLoading: false, autoClose: 3000 });
             setEmail('');
         } catch (error) {
             const errorMessage = error.response?.data?.message || error.response?.data?.detail;
@@ -31,7 +31,7 @@ const NewsLetterNew = () => {
     };
 
     return (
-        <div className="pressbg pressborder py-5 newsletter-bg" id="subscribe">
+        <div className="pressbg pressborder py-5 newsletter-bg">
             <Container>
                 <Row>
                     <Col xs={12} lg={8} className="mx-auto">
