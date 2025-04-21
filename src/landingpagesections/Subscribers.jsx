@@ -5,7 +5,7 @@ import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const NewsLetterNew = () => {
+const Subscribers = () => {
     const baseURL = process.env.NEXT_PUBLIC_BASE_URL;
     const [email, setEmail] = useState('');
 
@@ -13,12 +13,12 @@ const NewsLetterNew = () => {
         e.preventDefault();
         const loadingToastId = toast.loading("Submitting...");
         try {
-            const response = await axios.post(`${baseURL}/waitlist/subscribe`, { email }, {
+            const response = await axios.post(`${baseURL}/subscribers`, { email }, {
                 headers: {
                     "Content-Type": "application/json",
                 },
             });
-            toast.update(loadingToastId, { render: response.data.message || 'Thank you for subscribing to our newsletter!', type: "success", isLoading: false, autoClose: 3000 });
+            toast.update(loadingToastId, { render: response.data.message || 'Thank you for subscribing!', type: "success", isLoading: false, autoClose: 3000 });
             setEmail('');
         } catch (error) {
             const errorMessage = error.response?.data?.message || error.response?.data?.detail;
@@ -31,12 +31,12 @@ const NewsLetterNew = () => {
     };
 
     return (
-        <div className="pressbg pressborder py-5 newsletter-bg">
+        <div className="pressbg pressborder py-5 newsletter-bg" id="subscribe">
             <Container>
                 <Row>
                     <Col xs={12} lg={8} className="mx-auto">
                         <div className="text-center py-4">
-                            <h2 className="fw-bold text-white">Subscribe to Our Newsletter</h2>
+                            <h2 className="fw-bold text-white">Give more qualitative reviews than our AI and GET PAID!</h2>
                             <p className="text-white my-3">
                                 Stay updated with the latest AI-driven startup research and insights by the best academics in the world. Follow the journey of academic breakthroughs, the disruption of a dinosaur industry, and never miss out on a scientific breakthrough that could give you an edge while building your venture!
                             </p>
@@ -60,7 +60,7 @@ const NewsLetterNew = () => {
                                         onChange={(e) => setEmail(e.target.value)}
                                     />
                                     <Button className="newsletterbtn py-2 px-4" type="submit">
-                                        Submit
+                                        Subscribe
                                     </Button>
                                 </div>
                             </Form>
@@ -74,4 +74,4 @@ const NewsLetterNew = () => {
     );
 };
 
-export default NewsLetterNew;
+export default Subscribers;

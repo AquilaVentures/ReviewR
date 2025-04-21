@@ -36,9 +36,12 @@ const NewsLetter = () => {
                 <Row>
                     <Col xs={12} lg={8} className="mx-auto">
                         <div className="text-center py-4">
-                            <h2 className="fw-bold text-white">Give more qualitative reviews than our AI and GET PAID!</h2>
+                            <h2 className="fw-bold text-white">Join Our Newsletter & Earn While You Learn!</h2>
                             <p className="text-white my-3">
-                                Stay updated with the latest AI-driven startup research and insights by the best academics in the world. Follow the journey of academic breakthroughs, the disruption of a dinosaur industry, and never miss out on a scientific breakthrough that could give you an edge while building your venture!
+                                Be the first to get cutting-edge insights into AI-driven startup research and academic innovation.
+                                Stay in the loop on breakthrough discoveries, industry disruptions, and the future of venture building —
+                                all delivered straight to your inbox. <br />
+                                Ready to outsmart the AI with your reviews and get rewarded for it? Subscribe now!
                             </p>
                             <Form className="d-flex justify-content-center mt-4" onSubmit={handleSubmit}>
                                 <div
