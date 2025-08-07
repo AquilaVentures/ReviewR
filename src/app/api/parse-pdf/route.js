@@ -1,5 +1,7 @@
+import { google } from 'googleapis';
 import { NextResponse } from 'next/server';
 import pdfParse from 'pdf-parse';
+import credentials from '../../../../service-account.json';
 
 export const config = {
   api: {
@@ -7,15 +9,45 @@ export const config = {
   },
 };
 
+const SHEET_ID = process.env.NEXT_PUBLIC_GOOGLE_SHEET_ID;
+const SHEET_NAME = process.env.NEXT_PUBLIC_GOOGLE_SHEET_NAME;
+
+async function appendToSheet(text, email) {
+  const auth = new google.auth.GoogleAuth({
+    credentials,
+    scopes: ['https://www.googleapis.com/auth/spreadsheets'],
+  });
+
+  const sheets = google.sheets({ version: 'v4', auth });
+
+  const response = await sheets.spreadsheets.values.append({
+    spreadsheetId: SHEET_ID,
+    range: `${SHEET_NAME}!A:B`, // Now targeting columns A and B
+    valueInputOption: 'RAW',
+    insertDataOption: 'INSERT_ROWS',
+    requestBody: {
+      values: [[text, email]], // Text in A, email in B
+    },
+  });
+
+  return response;
+}
+
 export async function POST(req) {
   try {
-    const body = await req.arrayBuffer();
-    const buffer = Buffer.from(body);
+    const formData = await req.formData();
+    const pdfFile = formData.get('pdf');
+    const email = formData.get('email');
 
+    const buffer = Buffer.from(await pdfFile.arrayBuffer());
     const data = await pdfParse(buffer);
-    return NextResponse.json({ text: data.text });
+    const extractedText = data.text;
+
+    await appendToSheet(extractedText, email);
+
+    return NextResponse.json({ text: extractedText });
   } catch (error) {
-    console.error("PDF parse error:", error);
-    return NextResponse.json({ error: 'Failed to parse PDF' }, { status: 500 });
+    console.error('Error:', error.message);
+    return NextResponse.json({ error: 'Failed to process PDF' }, { status: 500 });
   }
 }
