@@ -2,11 +2,6 @@ import { google } from 'googleapis';
 import { NextResponse } from 'next/server';
 import pdfParse from 'pdf-parse';
 
-export const config = {
-  api: {
-    bodyParser: false,
-  },
-};
 
 const SHEET_ID = process.env.NEXT_PUBLIC_GOOGLE_SHEET_ID;
 const SHEET_NAME = process.env.NEXT_PUBLIC_GOOGLE_SHEET_NAME;
