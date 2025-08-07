@@ -63,7 +63,7 @@ const SecondUpload = () => {
 
     return (
         <div className='herobg py-5'>
-            <Container>
+            <Container className='py-5'>
                 <div className="text-center mb-5">
                     <h2 className='fw-bold text-white'>Get Your AI-driven Review Here & Reach 1.000s of Startups</h2>
                     <p className='text-white my-3'>
