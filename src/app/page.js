@@ -9,11 +9,13 @@ import Blogs from '@/landingpagesections/Blogs'
 import NewsLetter from '@/landingpagesections/NewsLetter'
 import Upload from '@/landingpagesections/Upload'
 import Subscribers from '@/landingpagesections/Subscribers'
+import SecondUpload from '@/landingpagesections/SecondUpload'
 const page = () => {
   return (
     <>
       <ToastContainer />
       <Hero />
+      {/* <SecondUpload/> */}
       <Vision />
       <Subscribers />
       <Counter />

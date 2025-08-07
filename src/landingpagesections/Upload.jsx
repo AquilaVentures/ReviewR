@@ -48,7 +48,7 @@ const Upload = () => {
 
         const formData = new FormData();
         formData.append("file", uploadFile);
-        formData.append("email", email); // Use user-provided email
+        formData.append("email", email); 
 
         setLoadingReportSummary(true);
         setError(null);
