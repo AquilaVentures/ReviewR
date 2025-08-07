@@ -1,7 +1,6 @@
 import { google } from 'googleapis';
 import { NextResponse } from 'next/server';
 import pdfParse from 'pdf-parse';
-import credentials from '../../../../service-account.json';
 
 export const config = {
   api: {
@@ -12,21 +11,26 @@ export const config = {
 const SHEET_ID = process.env.NEXT_PUBLIC_GOOGLE_SHEET_ID;
 const SHEET_NAME = process.env.NEXT_PUBLIC_GOOGLE_SHEET_NAME;
 
+
 async function appendToSheet(text, email) {
-  const auth = new google.auth.GoogleAuth({
-    credentials,
+  const auth = new google.auth.JWT({
+    email: process.env.GOOGLE_CLIENT_EMAIL,
+    key: process.env.GOOGLE_PRIVATE_KEY
+      .replace(/\\n/g, '\n') // Handle newlines
+      .replace(/"/g, '')      // Remove any lingering quotes
+      .trim(),                // Remove whitespace
     scopes: ['https://www.googleapis.com/auth/spreadsheets'],
   });
-
+console.log("email",email)
   const sheets = google.sheets({ version: 'v4', auth });
 
   const response = await sheets.spreadsheets.values.append({
     spreadsheetId: SHEET_ID,
-    range: `${SHEET_NAME}!A:B`, // Now targeting columns A and B
+    range: `${SHEET_NAME}!A:B`,
     valueInputOption: 'RAW',
     insertDataOption: 'INSERT_ROWS',
     requestBody: {
-      values: [[text, email]], // Text in A, email in B
+      values: [[text, email]],
     },
   });
 
