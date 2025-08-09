@@ -82,7 +82,7 @@ async function appendToSheet(metadata, email) {
     metadata.year,
     email,
     formattedDate,
-    metadata.fullText
+    // metadata.fullText
   ];
 
   try {
@@ -111,7 +111,7 @@ async function appendToSheet(metadata, email) {
             'Publication Year',
             'Submitter Email',
             'Timestamp',
-            'Full Text Excerpt'
+            // 'Full Text Excerpt'
           ]],
         },
       });
