@@ -61,45 +61,12 @@ const SecondUpload = () => {
 
     const { getRootProps, getInputProps } = useDropzone({ onDrop, multiple: false });
 
-    const handleClearSheet = async () => {
-        if (!window.confirm('Are you sure you want to clear all data from the sheet? This cannot be undone.')) {
-          return;
-        }
-      
-        setLoading(true);
-        try {
-          const response = await fetch('/api/parse-pdf', {
-            method: 'DELETE',
-          });
-      
-          const data = await response.json();
-          if (response.ok) {
-            toast.success("Sheet cleared successfully!");
-          } else {
-            toast.error(data.error || "Failed to clear sheet.");
-          }
-        } catch (err) {
-          console.error("Clear failed:", err);
-          toast.error("An unexpected error occurred.");
-        } finally {
-          setLoading(false);
-        }
-      };
+  
 
     return (
         <div className='herobg py-5'>
             <Container className='py-5'>
-            <Row className='mt-3'>
-  <Col xs={12} className='text-center'>
-    <Button 
-      variant="danger" 
-      onClick={handleClearSheet}
-      disabled={loading}
-    >
-      {loading ? 'Clearing...' : 'Clear All Sheet Data'}
-    </Button>
-  </Col>
-</Row>
+               
                 <div className="text-center mb-5">
                     <h2 className='fw-bold text-white'>Get Your AI-driven Review Here & Reach 1.000s of Startups</h2>
                     <p className='text-white my-3'>

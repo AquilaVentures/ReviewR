@@ -167,10 +167,9 @@ export async function DELETE() {
     const auth = getAuth();
     const sheets = google.sheets({ version: 'v4', auth });
 
-    // Clear all data except headers
     await sheets.spreadsheets.values.clear({
       spreadsheetId: process.env.NEXT_PUBLIC_GOOGLE_SHEET_ID,
-      range: `${process.env.NEXT_PUBLIC_GOOGLE_SHEET_NAME}!A:Z`, // Clears everything from row 2 onward
+      range: `${process.env.NEXT_PUBLIC_GOOGLE_SHEET_NAME}!A:Z`,
     });
 
     return NextResponse.json({ success: true });
