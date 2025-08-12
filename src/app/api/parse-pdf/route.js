@@ -161,3 +161,21 @@ export async function POST(req) {
     return NextResponse.json({ error: 'Failed to process PDF' }, { status: 500 });
   }
 }
+
+export async function DELETE() {
+  try {
+    const auth = getAuth();
+    const sheets = google.sheets({ version: 'v4', auth });
+
+    // Clear all data except headers
+    await sheets.spreadsheets.values.clear({
+      spreadsheetId: process.env.NEXT_PUBLIC_GOOGLE_SHEET_ID,
+      range: `${process.env.NEXT_PUBLIC_GOOGLE_SHEET_NAME}!A:Z`, // Clears everything from row 2 onward
+    });
+
+    return NextResponse.json({ success: true });
+  } catch (error) {
+    console.error('Error clearing sheet:', error);
+    return NextResponse.json({ error: 'Failed to clear sheet' }, { status: 500 });
+  }
+}
